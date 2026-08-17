@@ -67,7 +67,7 @@
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .item:hover {
-      transform: scale(1.08);
+      transform: var(--hover-transform, scale(1.08));
       filter: brightness(1.15);
       z-index: 10;
     }
@@ -83,55 +83,91 @@
     }
 
     /* Ajuste específico para Casa Nuestra */
-    .item:nth-child(3) img {
+    .item-casa img {
       filter: contrast(1.2) brightness(1.1);
     }
-    .item:nth-child(3):hover img {
+    .item-casa:hover img {
       filter: contrast(1.2) brightness(1.25);
     }
 
+    .item-paragraph img {
+      filter: invert(52%) sepia(54%) saturate(1021%) hue-rotate(321deg) brightness(103%) contrast(94%);
+    }
+
+    .item-ghost {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
     /* Posiciones y tamaños específicos para cada elemento */
-    .item:nth-child(1) { /* Portafolio */
+    .item-portfolio {
       top: 8vh;
       left: 12vw;
       width: 22vw;
+      --hover-transform: rotate(-2deg) scale(1.08);
       transform: rotate(-2deg);
     }
-    .item:nth-child(2) { /* Digital Walk */
+    .item-digital-walk {
       top: 12vh;
       right: 18vw;
       width: 28vw;
+      --hover-transform: rotate(1deg) scale(1.08);
       transform: rotate(1deg);
     }
-    .item:nth-child(3) { /* Casa Nuestra */
+    .item-casa {
       top: 38vh;
       left: 23vw;
       width: 24vw;
+      --hover-transform: rotate(-1deg) scale(1.08);
       transform: rotate(-1deg);
     }
-    .item:nth-child(4) { /* Research Blog */
+    .item-research {
       bottom: 18vh;
       left: 13vw;
       width: 20vw;
+      --hover-transform: rotate(2deg) scale(1.08);
       transform: rotate(2deg);
     }
-    .item:nth-child(5) { /* Merch Stand */
+    .item-merch {
       top: 45vh;
       right: 22vw;
       width: 26vw;
+      --hover-transform: rotate(-1.5deg) scale(1.08);
       transform: rotate(-1.5deg);
     }
-    .item:nth-child(6) { /* Coleccionables */
+    .item-coleccionables {
       bottom: 12vh;
       right: 28vw;
       width: 22vw;
+      --hover-transform: rotate(1.5deg) scale(1.08);
       transform: rotate(1.5deg);
     }
-    .item:nth-child(7) { /* Twitter */
+    .item-twitter {
       top: 32vh;
       left: 42vw;
       width: 16vw;
+      --hover-transform: rotate(-1deg) scale(1.08);
       transform: rotate(-1deg);
+    }
+    .item-onirc {
+      top: 24vh;
+      left: 5vw;
+      width: 16vw;
+      --hover-transform: rotate(-4deg) scale(1.08);
+      transform: rotate(-4deg);
+    }
+    .item-paragraph {
+      bottom: 19vh;
+      left: 32vw;
+      width: 13vw;
+      --hover-transform: rotate(-2deg) scale(1.08);
+      transform: rotate(-2deg);
+    }
+    .item-ghost {
+      top: 25vh;
+      left: 56vw;
+      width: 7vw;
+      transform: rotate(6deg);
     }
 
     /* Media query para ajustar tamaños en pantallas más pequeñas */
@@ -139,11 +175,62 @@
       .item {
         width: 30vw !important;
       }
+      .item-ghost {
+        width: 12vw !important;
+        left: 63vw;
+      }
       .vertical-stripe {
         width: 40px;
       }
       .horizontal-line, .horizontal-line-purple {
         width: calc(100% - 40px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        height: 100dvh;
+      }
+      .item-portfolio {
+        top: 7vh;
+        left: 9vw;
+      }
+      .item-digital-walk {
+        top: 14vh;
+        right: 16vw;
+      }
+      .item-onirc {
+        top: 26vh;
+        left: 8vw;
+      }
+      .item-twitter {
+        top: 34vh;
+        left: 36vw;
+      }
+      .item-ghost {
+        top: 31vh;
+        left: 70vw;
+      }
+      .item-casa {
+        top: 45vh;
+        left: 9vw;
+      }
+      .item-merch {
+        top: 49vh;
+        right: 9vw;
+      }
+      .item-research {
+        bottom: 21vh;
+        left: 8vw;
+      }
+      .item-paragraph {
+        bottom: 22vh;
+        left: 43vw;
+        width: 24vw !important;
+      }
+      .item-coleccionables {
+        bottom: 10vh;
+        right: 20vw;
       }
     }
 
@@ -182,46 +269,62 @@
   <a href="nft.html" class="circle-button">⭕</a>
   <div class="container">
     <!-- Portafolio -->
-    <div class="item">
-      <a href="https://bento.me/ricci" target="_blank">
+    <div class="item item-portfolio">
+      <a href="https://www.behance.net/ricardo-arias" target="_blank">
         <img src="portafolio.png" alt="Portafolio">
       </a>
     </div>
+    <!-- ONIRC -->
+    <div class="item item-onirc">
+      <a href="https://pocsi2.github.io/ONIRC/" target="_blank">
+        <img src="onirc-dialogue.svg" alt="ONIRC">
+      </a>
+    </div>
     <!-- Digital Walk Gal -->
-    <div class="item">
+    <div class="item item-digital-walk">
       <a href="https://oncyber.io/spaces/XoXl6QGJA623Skh2rMCJ" target="_blank">
         <img src="Digital Walk Gal.png" alt="Digital Walk Gal">
       </a>
     </div>
     <!-- Casa Nuestra (Digital Gal) -->
-    <div class="item">
+    <div class="item item-casa">
       <a href="https://oncyber.io/spaces/Dwi13vknf2a2yQGBwohi" target="_blank">
         <img src="Casa nuestra (Digital Gal).png" alt="Casa Nuestra - Digital Gal">
       </a>
     </div>
     <!-- Research Blog -->
-    <div class="item">
+    <div class="item item-research">
       <a href="https://reportevy.substack.com/" target="_blank">
         <img src="Research blog.png" alt="Research Blog">
       </a>
     </div>
+    <!-- Paragraph -->
+    <div class="item item-paragraph">
+      <a href="https://paragraph.com/@arias.ricardo.p" target="_blank">
+        <img src="Research blog.png" alt="Paragraph">
+      </a>
+    </div>
     <!-- Merch Stand -->
-    <div class="item">
+    <div class="item item-merch">
       <a href="https://radswag.printify.me/product/17581723" target="_blank">
         <img src="Merch Stand.png" alt="Merch Stand">
       </a>
     </div>
     <!-- Coleccionables -->
-    <div class="item">
+    <div class="item item-coleccionables">
       <a href="https://opensea.io/atrptra" target="_blank">
         <img src="Colleccionables.png" alt="Coleccionables">
       </a>
     </div>
     <!-- Twitter -->
-    <div class="item">
+    <div class="item item-twitter">
       <a href="https://x.com/richiye" target="_blank">
         <img src="x.png" alt="Twitter">
       </a>
+    </div>
+    <!-- Ghost -->
+    <div class="item item-ghost">
+      <img src="ghost-pencil.svg" alt="">
     </div>
   </div>
 </body>

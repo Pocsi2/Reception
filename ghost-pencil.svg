@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 190" role="img" aria-label="Fantasmita">
+  <defs>
+    <filter id="scratch">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="13" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="#151515" stroke-linecap="round" stroke-linejoin="round" filter="url(#scratch)">
+    <path d="M32 159 C31 125, 27 83, 40 55 C50 34, 69 24, 88 31 C117 42, 124 75, 121 159 C111 149, 102 149, 91 162 C81 147, 71 148, 61 163 C51 150, 43 151, 32 159 Z" stroke-width="5"/>
+    <path d="M49 150 C47 116, 45 81, 55 57" stroke-width="1.6" opacity="0.24"/>
+    <path d="M107 151 C109 116, 109 77, 97 52" stroke-width="1.6" opacity="0.22"/>
+    <path d="M62 81 C64 74, 72 74, 73 82 C74 90, 63 91, 62 81 Z" stroke-width="4"/>
+    <path d="M92 82 C94 75, 102 75, 103 83 C104 91, 93 92, 92 82 Z" stroke-width="4"/>
+    <path d="M72 109 C81 116, 91 116, 100 109" stroke-width="3" opacity="0.65"/>
+    <path d="M43 38 C29 31, 22 22, 18 13" stroke-width="2" opacity="0.28"/>
+    <path d="M111 37 C124 28, 131 20, 136 11" stroke-width="2" opacity="0.24"/>
+  </g>
+</svg>
