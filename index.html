@@ -9,10 +9,13 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
+      --paper-color: #ffffff;
+      --ink-color: #111111;
+      background-color: var(--paper-color);
       font-family: Arial, sans-serif;
       min-height: 100vh;
       overflow: hidden;
+      transition: background-color 0.45s ease;
     }
     /* Contenedor principal */
     .container {
@@ -32,8 +35,8 @@
       background: linear-gradient(to right, 
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0) 75%,
-        rgba(0, 0, 0, 0.75) 85%,
-        rgba(0, 0, 0, 1) 100%
+        color-mix(in srgb, var(--ink-color) 75%, transparent) 85%,
+        var(--ink-color) 100%
       );
       z-index: 4;
     }
@@ -58,8 +61,58 @@
       right: 0;
       width: 80px;
       height: 100vh;
-      background-color: #000000;
+      background-color: var(--ink-color);
       z-index: 5;
+      transition: background-color 0.45s ease;
+    }
+    .color-cross {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      width: 13px;
+      height: 13px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      opacity: 0.42;
+      z-index: 20;
+      image-rendering: pixelated;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .color-cross::before,
+    .color-cross::after {
+      content: "";
+      position: absolute;
+      background: var(--ink-color);
+      transition: background-color 0.45s ease;
+    }
+    .color-cross::before {
+      top: 5px;
+      left: 0;
+      width: 13px;
+      height: 3px;
+    }
+    .color-cross::after {
+      top: 0;
+      left: 5px;
+      width: 3px;
+      height: 13px;
+    }
+    .color-cross:hover,
+    .color-cross:focus-visible {
+      opacity: 0.85;
+      transform: scale(1.18);
+      outline: none;
+    }
+    .color-picker {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
     }
     /* Cada elemento con posición absoluta */
     .item {
@@ -93,6 +146,9 @@
     .item-paragraph img {
       filter: invert(52%) sepia(54%) saturate(1021%) hue-rotate(321deg) brightness(103%) contrast(94%);
       opacity: 0.5;
+    }
+    body.palette-active .item-paragraph img {
+      filter: none;
     }
 
     .item-ghost {
@@ -271,6 +327,8 @@
   <div class="vertical-stripe"></div>
   <div class="horizontal-line"></div>
   <div class="horizontal-line-purple"></div>
+  <button class="color-cross" type="button" aria-label="Cambiar color de fondo"></button>
+  <input class="color-picker" type="color" value="#ffffff" aria-label="Selector de color de fondo">
   <a href="nft.html" class="circle-button">⭕</a>
   <div class="container">
     <!-- Portafolio -->
@@ -332,5 +390,83 @@
       <img src="ghost-pencil.svg" alt="">
     </div>
   </div>
+  <script>
+    const colorCross = document.querySelector('.color-cross');
+    const colorPicker = document.querySelector('.color-picker');
+    const artworkImages = [...document.querySelectorAll('.item img')];
+    const originalSources = new Map(artworkImages.map((image) => [image, image.getAttribute('src')]));
+
+    function hexToRgb(hex) {
+      const value = hex.replace('#', '');
+      return {
+        r: parseInt(value.slice(0, 2), 16),
+        g: parseInt(value.slice(2, 4), 16),
+        b: parseInt(value.slice(4, 6), 16)
+      };
+    }
+
+    function getLuminance({ r, g, b }) {
+      const normalize = (channel) => {
+        const value = channel / 255;
+        return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+      };
+      return 0.2126 * normalize(r) + 0.7152 * normalize(g) + 0.0722 * normalize(b);
+    }
+
+    function getContrastInk(color) {
+      return getLuminance(color) > 0.42 ? { r: 17, g: 17, b: 17 } : { r: 246, g: 246, b: 240 };
+    }
+
+    function colorToCss({ r, g, b }) {
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    async function tintImage(image, src, ink) {
+      const source = new Image();
+      source.decoding = 'async';
+      source.src = src;
+      await source.decode();
+
+      const canvas = document.createElement('canvas');
+      canvas.width = source.naturalWidth;
+      canvas.height = source.naturalHeight;
+
+      const context = canvas.getContext('2d');
+      context.drawImage(source, 0, 0);
+
+      const frame = context.getImageData(0, 0, canvas.width, canvas.height);
+      const pixels = frame.data;
+
+      for (let index = 0; index < pixels.length; index += 4) {
+        const alpha = pixels[index + 3];
+        if (alpha === 0) continue;
+
+        const darkness = 1 - ((pixels[index] + pixels[index + 1] + pixels[index + 2]) / 765);
+        pixels[index] = ink.r;
+        pixels[index + 1] = ink.g;
+        pixels[index + 2] = ink.b;
+        pixels[index + 3] = Math.round(alpha * Math.max(0.18, darkness));
+      }
+
+      context.putImageData(frame, 0, 0);
+      image.src = canvas.toDataURL('image/png');
+    }
+
+    async function applyPalette(backgroundColor) {
+      const paper = hexToRgb(backgroundColor);
+      const ink = getContrastInk(paper);
+
+      document.body.classList.add('palette-active');
+      document.body.style.setProperty('--paper-color', backgroundColor);
+      document.body.style.setProperty('--ink-color', colorToCss(ink));
+
+      await Promise.all(artworkImages.map((image) => tintImage(image, originalSources.get(image), ink)));
+    }
+
+    colorCross.addEventListener('click', () => colorPicker.click());
+    colorPicker.addEventListener('input', (event) => {
+      applyPalette(event.target.value);
+    });
+  </script>
 </body>
 </html>
