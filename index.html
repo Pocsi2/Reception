@@ -95,8 +95,9 @@
     }
 
     .item-ghost {
-      opacity: 0.55;
+      opacity: 0.34;
       pointer-events: none;
+      z-index: 1;
     }
 
     /* Posiciones y tamaños específicos para cada elemento */
@@ -146,28 +147,30 @@
       top: 32vh;
       left: 42vw;
       width: 16vw;
+      z-index: 2;
       --hover-transform: rotate(-1deg) scale(1.08);
       transform: rotate(-1deg);
     }
     .item-onirc {
-      top: 24vh;
-      left: 5vw;
-      width: 16vw;
+      top: 25vh;
+      left: 8vw;
+      width: 5vw;
       --hover-transform: rotate(-4deg) scale(1.08);
       transform: rotate(-4deg);
     }
     .item-paragraph {
-      bottom: 19vh;
-      left: 32vw;
+      bottom: 18vh;
+      left: 24vw;
       width: 13vw;
-      --hover-transform: rotate(-2deg) scale(1.08);
-      transform: rotate(-2deg);
+      z-index: 3;
+      --hover-transform: rotate(-5deg) scale(1.08);
+      transform: rotate(-5deg);
     }
     .item-ghost {
-      top: 25vh;
-      left: 56vw;
-      width: 7vw;
-      transform: rotate(6deg);
+      top: 31vh;
+      left: 42.5vw;
+      width: 2.4vw;
+      transform: rotate(4deg);
     }
 
     /* Media query para ajustar tamaños en pantallas más pequeñas */
@@ -176,8 +179,8 @@
         width: 30vw !important;
       }
       .item-ghost {
-        width: 12vw !important;
-        left: 63vw;
+        width: 4vw !important;
+        left: 40vw;
       }
       .vertical-stripe {
         width: 40px;
@@ -200,16 +203,17 @@
         right: 16vw;
       }
       .item-onirc {
-        top: 26vh;
+        top: 25vh;
         left: 8vw;
+        width: 12vw !important;
       }
       .item-twitter {
         top: 34vh;
         left: 36vw;
       }
       .item-ghost {
-        top: 31vh;
-        left: 70vw;
+        top: 34vh;
+        left: 38vw;
       }
       .item-casa {
         top: 45vh;
@@ -224,8 +228,8 @@
         left: 8vw;
       }
       .item-paragraph {
-        bottom: 22vh;
-        left: 43vw;
+        bottom: 21vh;
+        left: 24vw;
         width: 24vw !important;
       }
       .item-coleccionables {
