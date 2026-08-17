@@ -155,11 +155,74 @@
       display: inline-block;
       text-decoration: none;
       position: relative;
+      pointer-events: none;
     }
     .item img {
       display: block;
       max-width: 100%;
       height: auto;
+      pointer-events: none;
+    }
+    .hit-area {
+      position: absolute;
+      display: block;
+      border-radius: 999px;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    .item-portfolio .hit-area {
+      top: -35%;
+      left: -4%;
+      width: 108%;
+      height: 170%;
+    }
+    .item-onirc .hit-area {
+      top: -25%;
+      left: -25%;
+      width: 150%;
+      height: 150%;
+    }
+    .item-digital-walk .hit-area {
+      top: 7%;
+      left: 10%;
+      width: 78%;
+      height: 78%;
+    }
+    .item-casa .hit-area {
+      top: 4%;
+      left: 4%;
+      width: 92%;
+      height: 92%;
+    }
+    .item-research .hit-area {
+      top: 7%;
+      left: 2%;
+      width: 82%;
+      height: 82%;
+    }
+    .item-paragraph .hit-area {
+      top: -45%;
+      left: -55%;
+      width: 210%;
+      height: 210%;
+    }
+    .item-merch .hit-area {
+      top: 8%;
+      left: 14%;
+      width: 72%;
+      height: 76%;
+    }
+    .item-coleccionables .hit-area {
+      top: -30%;
+      left: -6%;
+      width: 112%;
+      height: 160%;
+    }
+    .item-twitter .hit-area {
+      top: -55%;
+      left: -8%;
+      width: 116%;
+      height: 210%;
     }
 
     /* Ajuste específico para Casa Nuestra */
@@ -365,54 +428,63 @@
     <div class="item item-portfolio">
       <a href="https://www.behance.net/ricardo-arias" target="_blank">
         <img src="portafolio.png" alt="Portafolio">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- ONIRC -->
     <div class="item item-onirc">
       <a href="https://pocsi2.github.io/ONIRC/" target="_blank">
         <img src="onirc-dialogue.svg" alt="ONIRC">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Digital Walk Gal -->
     <div class="item item-digital-walk">
       <a href="https://oncyber.io/spaces/XoXl6QGJA623Skh2rMCJ" target="_blank">
         <img src="Digital Walk Gal.png" alt="Digital Walk Gal">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Casa Nuestra (Digital Gal) -->
     <div class="item item-casa">
       <a href="https://oncyber.io/spaces/Dwi13vknf2a2yQGBwohi" target="_blank">
         <img src="Casa nuestra (Digital Gal).png" alt="Casa Nuestra - Digital Gal">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Research Blog -->
     <div class="item item-research">
       <a href="https://reportevy.substack.com/" target="_blank">
         <img src="Research blog.png" alt="Research Blog">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Paragraph -->
     <div class="item item-paragraph">
       <a href="https://paragraph.com/@arias.ricardo.p" target="_blank">
         <img src="Research blog.png" alt="Paragraph">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Merch Stand -->
     <div class="item item-merch">
       <a href="https://radswag.printify.me/product/17581723" target="_blank">
         <img src="Merch Stand.png" alt="Merch Stand">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Coleccionables -->
     <div class="item item-coleccionables">
       <a href="https://opensea.io/atrptra" target="_blank">
         <img src="Colleccionables.png" alt="Coleccionables">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Twitter -->
     <div class="item item-twitter">
       <a href="https://x.com/richiye" target="_blank">
         <img src="x.png" alt="Twitter">
+        <span class="hit-area" aria-hidden="true"></span>
       </a>
     </div>
     <!-- Ghost -->
@@ -428,7 +500,7 @@
     const colorContext = colorField.getContext('2d');
     const hueContext = hueField.getContext('2d');
     const artworkImages = [...document.querySelectorAll('.item img')];
-    const artworkLinks = [...document.querySelectorAll('.item a')];
+    const hitAreas = [...document.querySelectorAll('.hit-area')];
     const originalSources = new Map(artworkImages.map((image) => [image, image.currentSrc || image.getAttribute('src')]));
     const imageMasks = new Map();
     let hue = 0;
@@ -607,21 +679,16 @@
       });
     }
 
-    async function hitsVisibleInk(event, link) {
-      const image = link.querySelector('img');
-      const maskData = await createImageMask(image);
-      const rect = image.getBoundingClientRect();
-      const x = Math.floor(((event.clientX - rect.left) / rect.width) * maskData.width);
-      const y = Math.floor(((event.clientY - rect.top) / rect.height) * maskData.height);
-
-      if (x < 0 || y < 0 || x >= maskData.width || y >= maskData.height) return false;
-      return maskData.mask[y * maskData.width + x] > 12;
-    }
-
-    artworkLinks.forEach((link) => {
-      link.addEventListener('click', async (event) => {
+    colorCross.addEventListener('click', () => {
+      const isOpen = colorPanel.classList.toggle('is-open');
+      colorCross.setAttribute('aria-expanded', String(isOpen));
+    });
+    bindDrag(colorField, pickFromColorField);
+    bindDrag(hueField, pickFromHueField);
+    hitAreas.forEach((hitArea) => {
+      hitArea.addEventListener('click', (event) => {
+        const link = hitArea.closest('a');
         event.preventDefault();
-        if (!(await hitsVisibleInk(event, link))) return;
 
         if (link.target === '_blank') {
           window.open(link.href, '_blank', 'noopener');
@@ -629,24 +696,7 @@
           window.location.href = link.href;
         }
       });
-      link.addEventListener('mousemove', async (event) => {
-        link.style.cursor = (await hitsVisibleInk(event, link)) ? 'pointer' : 'default';
-      });
-      link.addEventListener('mouseleave', () => {
-        link.style.cursor = '';
-      });
-      link.addEventListener('pointerenter', () => {
-        const image = link.querySelector('img');
-        createImageMask(image);
-      });
     });
-
-    colorCross.addEventListener('click', () => {
-      const isOpen = colorPanel.classList.toggle('is-open');
-      colorCross.setAttribute('aria-expanded', String(isOpen));
-    });
-    bindDrag(colorField, pickFromColorField);
-    bindDrag(hueField, pickFromHueField);
     drawHueField();
     drawColorField();
   </script>
