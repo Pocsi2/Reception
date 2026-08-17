@@ -4,15 +4,15 @@
   <defs>
     <filter id="rough">
       <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="8" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </defs>
   <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
-    <path d="M83 45 C88 23, 117 20, 129 35 C146 18, 178 29, 178 53 C205 59, 207 95, 182 104 C174 127, 139 129, 127 111 C109 129, 78 120, 77 98 C51 92, 54 56, 83 45 Z" stroke-width="5"/>
-    <path d="M81 50 C97 34, 116 31, 129 42" stroke-width="1.7" opacity="0.34"/>
-    <path d="M132 40 C149 27, 173 36, 173 55" stroke-width="1.7" opacity="0.28"/>
-    <path d="M82 94 C96 116, 122 117, 135 102" stroke-width="1.5" opacity="0.24"/>
-    <circle cx="54" cy="117" r="11" stroke-width="4"/>
-    <circle cx="29" cy="133" r="6" stroke-width="3"/>
+    <path d="M83 45 C88 23, 117 20, 129 35 C146 18, 178 29, 178 53 C205 59, 207 95, 182 104 C174 127, 139 129, 127 111 C109 129, 78 120, 77 98 C51 92, 54 56, 83 45 Z" stroke-width="1.2"/>
+    <path d="M81 50 C97 34, 116 31, 129 42" stroke-width="0.55" opacity="0.26"/>
+    <path d="M132 40 C149 27, 173 36, 173 55" stroke-width="0.55" opacity="0.22"/>
+    <path d="M82 94 C96 116, 122 117, 135 102" stroke-width="0.5" opacity="0.2"/>
+    <circle cx="54" cy="117" r="11" stroke-width="1"/>
+    <circle cx="29" cy="133" r="6" stroke-width="0.8"/>
   </g>
 </svg>
