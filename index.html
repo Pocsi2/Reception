@@ -67,46 +67,42 @@
     }
     .color-cross {
       position: fixed;
-      top: 15px;
-      right: 27px;
-      width: 21px;
-      height: 21px;
+      top: 14px;
+      right: 23px;
+      width: 34px;
+      height: 34px;
       padding: 0;
       border: 0;
-      background: transparent;
+      background:
+        linear-gradient(rgba(255, 239, 225, 0.72), rgba(255, 239, 225, 0.72)) 5px 5px / 24px 24px no-repeat,
+        linear-gradient(rgba(253, 197, 178, 0.78), rgba(253, 197, 178, 0.78)) 10px 8px / 12px 8px no-repeat,
+        linear-gradient(rgba(238, 132, 119, 0.76), rgba(238, 132, 119, 0.76)) 14px 8px / 12px 12px no-repeat,
+        linear-gradient(rgba(178, 59, 85, 0.82), rgba(178, 59, 85, 0.82)) 12px 14px / 14px 12px no-repeat,
+        linear-gradient(rgba(222, 93, 111, 0.58), rgba(222, 93, 111, 0.58)) 8px 20px / 13px 8px no-repeat,
+        linear-gradient(rgba(250, 166, 143, 0.52), rgba(250, 166, 143, 0.52)) 19px 21px / 8px 7px no-repeat;
       cursor: pointer;
-      opacity: 0.48;
+      opacity: 0.7;
       z-index: 20;
       image-rendering: pixelated;
-      transition: opacity 0.18s ease, transform 0.18s ease;
+      box-shadow: 0 0 0 1px rgba(255, 240, 230, 0.18);
+      transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
     }
     .color-cross::before {
       content: "";
       position: absolute;
-      top: 9px;
-      left: 9px;
-      width: 3px;
-      height: 3px;
-      background: var(--paper-color);
-      box-shadow:
-        0 -9px 0 var(--paper-color),
-        0 -6px 0 var(--paper-color),
-        0 -3px 0 var(--paper-color),
-        0 3px 0 var(--paper-color),
-        0 6px 0 var(--paper-color),
-        0 9px 0 var(--paper-color),
-        -9px 0 0 var(--paper-color),
-        -6px 0 0 var(--paper-color),
-        -3px 0 0 var(--paper-color),
-        3px 0 0 var(--paper-color),
-        6px 0 0 var(--paper-color),
-        9px 0 0 var(--paper-color);
-      transition: background-color 0.16s ease, box-shadow 0.16s ease;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 230, 214, 0.46), rgba(255, 230, 214, 0.46)) 4px 10px / 6px 17px no-repeat,
+        linear-gradient(rgba(255, 230, 214, 0.4), rgba(255, 230, 214, 0.4)) 10px 4px / 16px 6px no-repeat,
+        linear-gradient(rgba(255, 230, 214, 0.36), rgba(255, 230, 214, 0.36)) 26px 10px / 4px 18px no-repeat,
+        linear-gradient(rgba(255, 230, 214, 0.28), rgba(255, 230, 214, 0.28)) 10px 28px / 14px 3px no-repeat;
+      pointer-events: none;
     }
     .color-cross:hover,
     .color-cross:focus-visible {
-      opacity: 0.85;
-      transform: scale(1.12);
+      opacity: 0.94;
+      transform: scale(1.08);
+      box-shadow: 0 0 0 1px rgba(255, 240, 230, 0.34);
       outline: none;
     }
     .color-panel {
