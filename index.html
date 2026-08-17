@@ -140,9 +140,11 @@
     /* Cada elemento con posición absoluta */
     .item {
       position: absolute;
+      pointer-events: none;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .item:hover {
+    .item:hover,
+    .item.is-hot {
       transform: var(--hover-transform, scale(1.08));
       filter: brightness(1.15);
       z-index: 10;
@@ -162,70 +164,74 @@
     .hit-area {
       position: absolute;
       display: block;
-      border-radius: 999px;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      border-radius: 50%;
       cursor: pointer;
       pointer-events: auto;
     }
     .item-portfolio .hit-area {
-      top: -35%;
-      left: -4%;
-      width: 108%;
-      height: 170%;
-    }
-    .item-onirc .hit-area {
-      top: -25%;
-      left: -25%;
-      width: 150%;
-      height: 150%;
-    }
-    .item-digital-walk .hit-area {
-      top: 7%;
-      left: 10%;
-      width: 78%;
-      height: 78%;
-    }
-    .item-casa .hit-area {
-      top: 4%;
-      left: 4%;
-      width: 92%;
-      height: 92%;
-    }
-    .item-research .hit-area {
-      top: 7%;
-      left: 2%;
-      width: 82%;
-      height: 82%;
-    }
-    .item-paragraph .hit-area {
-      top: -45%;
-      left: -55%;
-      width: 210%;
-      height: 210%;
-    }
-    .item-merch .hit-area {
-      top: 8%;
-      left: 14%;
-      width: 72%;
-      height: 76%;
-    }
-    .item-coleccionables .hit-area {
-      top: -30%;
-      left: -6%;
-      width: 112%;
+      top: -32%;
+      left: -2%;
+      width: 104%;
       height: 160%;
     }
+    .item-onirc .hit-area {
+      top: -35%;
+      left: -38%;
+      width: 176%;
+      height: 170%;
+    }
+    .item-digital-walk .hit-area {
+      top: 12%;
+      left: 16%;
+      width: 68%;
+      height: 64%;
+    }
+    .item-casa .hit-area {
+      top: 10%;
+      left: 11%;
+      width: 78%;
+      height: 76%;
+    }
+    .item-research .hit-area {
+      top: 12%;
+      left: 8%;
+      width: 72%;
+      height: 72%;
+    }
+    .item-paragraph .hit-area {
+      top: 12%;
+      left: 8%;
+      width: 72%;
+      height: 72%;
+    }
+    .item-merch .hit-area {
+      top: 12%;
+      left: 20%;
+      width: 60%;
+      height: 66%;
+    }
+    .item-coleccionables .hit-area {
+      top: -22%;
+      left: -2%;
+      width: 104%;
+      height: 144%;
+    }
     .item-twitter .hit-area {
-      top: -55%;
-      left: -8%;
-      width: 116%;
-      height: 210%;
+      top: -44%;
+      left: -4%;
+      width: 108%;
+      height: 188%;
     }
 
     /* Ajuste específico para Casa Nuestra */
     .item-casa img {
       filter: contrast(1.2) brightness(1.1);
     }
-    .item-casa:hover img {
+    .item-casa:hover img,
+    .item-casa.is-hot img {
       filter: contrast(1.2) brightness(1.25);
     }
 
@@ -304,7 +310,7 @@
     .item-paragraph {
       bottom: 18vh;
       left: 17vw;
-      width: 3.25vw;
+      width: 20vw;
       z-index: 3;
       --hover-transform: rotate(-5deg) scale(1.08);
       transform: rotate(-5deg);
@@ -373,7 +379,7 @@
       .item-paragraph {
         bottom: 21vh;
         left: 14vw;
-        width: 6vw !important;
+        width: 30vw !important;
       }
       .item-coleccionables {
         bottom: 10vh;
@@ -424,64 +430,64 @@
     <div class="item item-portfolio">
       <a href="https://www.behance.net/ricardo-arias" target="_blank">
         <img src="portafolio.png" alt="Portafolio">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://www.behance.net/ricardo-arias" aria-label="Abrir Portafolio"></button>
     </div>
     <!-- ONIRC -->
     <div class="item item-onirc">
       <a href="https://pocsi2.github.io/ONIRC/" target="_blank">
         <img src="onirc-dialogue.svg" alt="ONIRC">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://pocsi2.github.io/ONIRC/" aria-label="Abrir ONIRC"></button>
     </div>
     <!-- Digital Walk Gal -->
     <div class="item item-digital-walk">
       <a href="https://oncyber.io/spaces/XoXl6QGJA623Skh2rMCJ" target="_blank">
         <img src="Digital Walk Gal.png" alt="Digital Walk Gal">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://oncyber.io/spaces/XoXl6QGJA623Skh2rMCJ" aria-label="Abrir Digital Walk Gal"></button>
     </div>
     <!-- Casa Nuestra (Digital Gal) -->
     <div class="item item-casa">
       <a href="https://oncyber.io/spaces/Dwi13vknf2a2yQGBwohi" target="_blank">
         <img src="Casa nuestra (Digital Gal).png" alt="Casa Nuestra - Digital Gal">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://oncyber.io/spaces/Dwi13vknf2a2yQGBwohi" aria-label="Abrir Casa Nuestra"></button>
     </div>
     <!-- Research Blog -->
     <div class="item item-research">
       <a href="https://reportevy.substack.com/" target="_blank">
         <img src="Research blog.png" alt="Research Blog">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://reportevy.substack.com/" aria-label="Abrir Research Blog"></button>
     </div>
     <!-- Paragraph -->
     <div class="item item-paragraph">
       <a href="https://paragraph.com/@arias.ricardo.p" target="_blank">
         <img src="Research blog.png" alt="Paragraph">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://paragraph.com/@arias.ricardo.p" aria-label="Abrir Paragraph"></button>
     </div>
     <!-- Merch Stand -->
     <div class="item item-merch">
       <a href="https://radswag.printify.me/product/17581723" target="_blank">
         <img src="Merch Stand.png" alt="Merch Stand">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://radswag.printify.me/product/17581723" aria-label="Abrir Merch Stand"></button>
     </div>
     <!-- Coleccionables -->
     <div class="item item-coleccionables">
       <a href="https://opensea.io/atrptra" target="_blank">
         <img src="Colleccionables.png" alt="Coleccionables">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://opensea.io/atrptra" aria-label="Abrir Coleccionables"></button>
     </div>
     <!-- Twitter -->
     <div class="item item-twitter">
       <a href="https://x.com/richiye" target="_blank">
         <img src="x.png" alt="Twitter">
-        <span class="hit-area" aria-hidden="true"></span>
       </a>
+      <button class="hit-area" type="button" data-href="https://x.com/richiye" aria-label="Abrir X"></button>
     </div>
     <!-- Ghost -->
     <div class="item item-ghost">
@@ -682,15 +688,17 @@
     bindDrag(colorField, pickFromColorField);
     bindDrag(hueField, pickFromHueField);
     hitAreas.forEach((hitArea) => {
-      hitArea.addEventListener('click', (event) => {
-        const link = hitArea.closest('a');
-        event.preventDefault();
+      const item = hitArea.closest('.item');
 
-        if (link.target === '_blank') {
-          window.open(link.href, '_blank', 'noopener');
-        } else {
-          window.location.href = link.href;
-        }
+      hitArea.addEventListener('pointerenter', () => {
+        item.classList.add('is-hot');
+      });
+      hitArea.addEventListener('pointerleave', () => {
+        item.classList.remove('is-hot');
+      });
+      hitArea.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.open(hitArea.dataset.href, '_blank', 'noopener');
       });
     });
     drawHueField();
