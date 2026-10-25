@@ -408,6 +408,34 @@
       transform: scale(1.1);
       opacity: 1;
     }
+
+    .gal-sock-link {
+      position: fixed;
+      right: 23px;
+      bottom: 25px;
+      z-index: 12;
+      display: grid;
+      width: 34px;
+      height: 42px;
+      place-items: center;
+      opacity: 0.82;
+      transform: rotate(-7deg);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .gal-sock-link:hover,
+    .gal-sock-link:focus-visible {
+      opacity: 1;
+      transform: rotate(3deg) scale(1.12);
+      outline: none;
+    }
+    .gal-sock-link:focus-visible img {
+      filter: drop-shadow(0 0 3px #fff2d8);
+    }
+    .gal-sock-link img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
@@ -420,6 +448,9 @@
     <canvas class="hue-field" width="14" height="96"></canvas>
   </div>
   <a href="nft.html" class="circle-button">⭕</a>
+  <a class="gal-sock-link" href="https://pocsi2.github.io/Gal/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Gal" title="Visitar Gal">
+    <img src="sock-gal.svg" alt="">
+  </a>
   <div class="container">
     <!-- Portafolio -->
     <div class="item item-portfolio">

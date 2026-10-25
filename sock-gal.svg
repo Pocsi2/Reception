@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 60" role="img" aria-label="Calcetín dibujado a mano">
+  <path d="M15 5c4 1 10 0 15-1l1 23c0 4 2 7 6 10l6 5c3 2 2 6-2 8-8 5-21 5-30 1-5-2-7-6-4-10l5-6c3-3 4-6 4-10L15 5Z"
+        fill="#fff4df" stroke="#171717" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m14 8 16-1M15 12l15-1M17 16l13-1" fill="none" stroke="#d86b64" stroke-width="2" stroke-linecap="round"/>
+  <path d="M13 41c6 3 13 5 22 3M11 45c7 3 15 4 24 2" fill="none" stroke="#171717" stroke-width="1.1" stroke-linecap="round" opacity=".72"/>
+  <path d="m20 25 1 1m7-2 1 1" fill="none" stroke="#d86b64" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
